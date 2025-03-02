@@ -1,11 +1,14 @@
+import os
+os.environ["OPENCV_IO_ENABLE_OPENEXR"] = "0"
+
 import cv2
 import numpy as np
 import mediapipe as mp
 import skimage.feature as skf
+from skimage.feature import local_binary_pattern
 from sklearn.cluster import KMeans
 import streamlit as st
 from PIL import Image
-from skimage.feature import local_binary_pattern
 from mtcnn import MTCNN
 
 
