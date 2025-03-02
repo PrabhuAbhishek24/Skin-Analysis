@@ -1,10 +1,5 @@
 import os
-
-# Fix OpenCV libGL.so.1 error
-os.environ["QT_QPA_PLATFORM"] = "offscreen"
-os.environ["OPENCV_IO_ENABLE_OPENEXR"] = "0"
-
-import cv2  # Now safe to import
+import cv2  # Now OpenCV should work fine
 import numpy as np
 import mediapipe as mp
 import skimage.feature as skf
