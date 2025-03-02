@@ -6,7 +6,7 @@ cmake==3.31.2
 Cython==3.0.11
 pyjnius==1.6.1
 streamlit==1.41.1
-opencv-python=4.5.5
+opencv-python==4.5.5
 numpy==1.26.4
 mediapipe==0.10.21
 scikit-image==0.22.0
