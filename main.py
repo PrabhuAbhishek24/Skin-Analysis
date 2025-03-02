@@ -1,4 +1,9 @@
 import os
+
+# Load the secret environment variable
+os.environ["LD_LIBRARY_PATH"] = st.secrets["environment"]["LD_LIBRARY_PATH"]
+
+
 import cv2  # Now OpenCV should work fine
 import numpy as np
 import mediapipe as mp
@@ -8,6 +13,7 @@ from sklearn.cluster import KMeans
 import streamlit as st
 from PIL import Image
 from mtcnn import MTCNN
+
 
 # Initialize Mediapipe Face Detection
 mp_face_detection = mp.solutions.face_detection
