@@ -1,5 +1,5 @@
 import os
-
+import streamlit as st
 # Load the secret environment variable
 os.environ["LD_LIBRARY_PATH"] = st.secrets["environment"]["LD_LIBRARY_PATH"]
 
