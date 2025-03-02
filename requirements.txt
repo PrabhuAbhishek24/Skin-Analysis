@@ -6,3 +6,5 @@ scikit-image==0.22.0
 scikit-learn==1.4.0
 pillow==10.2.0
 mtcnn==0.1.1
+pyglet==2.0.10
+glfw==2.6.2
