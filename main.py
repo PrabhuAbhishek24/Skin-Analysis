@@ -1,4 +1,8 @@
-# import cv2
+# Fix OpenCV libGL.so.1 error
+os.environ["QT_QPA_PLATFORM"] = "offscreen"
+os.environ["OPENCV_IO_ENABLE_OPENEXR"] = "0"
+
+import cv2  # Now safe to import
 import numpy as np
 import mediapipe as mp
 import skimage.feature as skf
@@ -7,7 +11,6 @@ from sklearn.cluster import KMeans
 import streamlit as st
 from PIL import Image
 from mtcnn import MTCNN
-
 
 # Initialize Mediapipe Face Detection
 mp_face_detection = mp.solutions.face_detection
