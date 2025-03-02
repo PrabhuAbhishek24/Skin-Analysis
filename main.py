@@ -1,3 +1,5 @@
+import os
+
 # Fix OpenCV libGL.so.1 error
 os.environ["QT_QPA_PLATFORM"] = "offscreen"
 os.environ["OPENCV_IO_ENABLE_OPENEXR"] = "0"
