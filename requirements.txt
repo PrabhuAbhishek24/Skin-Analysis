@@ -47,3 +47,4 @@ torchvision==0.21.0
 wheel==0.44.0
 xgboost==2.1.4
 streamlit==1.41.1
+mkl-service==2.4.0
