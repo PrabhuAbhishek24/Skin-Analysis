@@ -8,5 +8,5 @@ mtcnn==0.1.1
 pyglet==2.0.10
 glfw==2.6.2
 opencv-python-headless==4.6.0.66
-streamlit==1.30.0
+streamlit==1.42.0
 tensorflow>=2.12.0
