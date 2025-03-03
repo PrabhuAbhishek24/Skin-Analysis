@@ -1,23 +1,11 @@
-import os
-import streamlit as st
-# Load the secret environment variable
-os.environ["LD_LIBRARY_PATH"] = st.secrets["environment"]["LD_LIBRARY_PATH"]
-
-
-import cv2  # Now OpenCV should work fine
+import cv2
 import numpy as np
-import mediapipe as mp
 import skimage.feature as skf
-from skimage.feature import local_binary_pattern
 from sklearn.cluster import KMeans
 import streamlit as st
 from PIL import Image
+from skimage.feature import local_binary_pattern
 from mtcnn import MTCNN
-
-
-# Initialize Mediapipe Face Detection
-mp_face_detection = mp.solutions.face_detection
-face_detection = mp_face_detection.FaceDetection(min_detection_confidence=0.8)
 
 def check_lighting_conditions(image):
     """Ensure proper lighting conditions before capturing an image."""
@@ -508,25 +496,52 @@ def main():
 
 
              if st.button("🔍 Analyze Face"):
-                with st.spinner("🔄 **Processing facial attributes...**"):
-                    results = analyze_all_features("captured_face.jpg")
+               with st.spinner("🔄 **Processing facial attributes...**"):
+                 results = analyze_all_features("captured_face.jpg")
 
-                    st.success("✅ **Analysis Completed!**")
+                 st.success("✅ **Analysis Completed!**")
 
-                    # Display results in two columns
-                    st.write("### 🏷 **Analysis Results**")
-                    col1, col2 = st.columns(2)
+                 # Function to categorize scores
+                 def get_skin_type(score):
+                  return "Dry Skin" if score <= 3 else "Normal Skin" if score <= 6 else "Oily Skin"
 
-                    with col1:
-                        st.write(f"🔹 **Skin Type:** {results['Skin Type']}/10")
-                        st.write(f"🔹 **Wrinkles:** {results['Wrinkles']}/10")
-                        st.write(f"🔹 **Dark Circles:** {results['Dark Circles']}/10")
+                 def get_wrinkle_type(score):
+                  return "Smooth Skin (Low Wrinkles)" if score <= 3 else "Mild Wrinkles" if score <= 6 else "High Wrinkle Presence"
 
-                    with col2:
-                        st.write(f"🔹 **Acne/Pimples:** {results['Acne/Pimples']}/10")
-                        st.write(f"🔹 **Skin Pigmentation:** {results['Skin Pigmentation']}/10")
-                        st.write(f"🔹 **Oiliness Level:** {results['Oiliness Level']}/10")
-   
+                 def get_dark_circle_type(score):
+                  return "No Dark Circles" if score <= 3 else "Mild Dark Circles" if score <= 6 else "Severe Dark Circles"
+
+                 def get_acne_type(score):
+                   return "Clear Skin" if score <= 3 else "Moderate Acne" if score <= 6 else "Severe Acne"
+
+                 def get_pigmentation_type(score):
+                    return "Even Skin (Low Pigmentation)" if score <= 3 else "Mild Pigmentation" if score <= 6 else "High Pigmentation"
+
+                 def get_oiliness_type(score):
+                    return "Matte/Normal Skin (Low Shine)" if score <= 3 else "Moderately Oily Skin" if score <= 6 else "Very Oily Skin (High Shine)"
+
+                 # Display results in two columns
+                 st.write("### 🏷 **Analysis Results**")
+                 col1, col2 = st.columns(2)
+
+                 with col1:
+                   skin_type_score = results['Skin Type']
+                   wrinkles_score = results['Wrinkles']
+                   dark_circles_score = results['Dark Circles']
+            
+                   st.write(f"🔹 **Skin Type:** {skin_type_score}/10 ({get_skin_type(skin_type_score)})")
+                   st.write(f"🔹 **Wrinkles:** {wrinkles_score}/10 ({get_wrinkle_type(wrinkles_score)})")
+                   st.write(f"🔹 **Dark Circles:** {dark_circles_score}/10 ({get_dark_circle_type(dark_circles_score)})")
+
+                 with col2:
+                   acne_score = results['Acne/Pimples']
+                   pigmentation_score = results['Skin Pigmentation']
+                   oiliness_score = results['Oiliness Level']
+
+                   st.write(f"🔹 **Acne/Pimples:** {acne_score}/10 ({get_acne_type(acne_score)})")
+                   st.write(f"🔹 **Skin Pigmentation:** {pigmentation_score}/10 ({get_pigmentation_type(pigmentation_score)})")
+                   st.write(f"🔹 **Oiliness Level:** {oiliness_score}/10 ({get_oiliness_type(oiliness_score)})")
+
    
    # Section 3
     elif selected_section=="📝 Instructions":
