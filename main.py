@@ -503,22 +503,22 @@ def main():
 
                  # Function to categorize scores
                  def get_skin_type(score):
-                  return "Dry Skin" if score >=0.00 and <=3.99  else "Normal Skin" if score >= 4.00 and <=6.99 else "Oily Skin"
+                  return "Dry Skin" if 0.00 <= score <= 3.99  else "Normal Skin" if 4.00 <= score <= 6.99 else "Oily Skin"
 
                  def get_wrinkle_type(score):
-                  return "Smooth Skin (Low Wrinkles)" if score >=0.00 and <=3.99 else "Mild Wrinkles" if score >= 4.00 and <=6.99 else "High Wrinkle Presence"
+                  return "Smooth Skin (Low Wrinkles)" if 0.00 <= score <= 3.99 else "Mild Wrinkles" if 4.00 <= score <= 6.99 else "High Wrinkle Presence"
 
                  def get_dark_circle_type(score):
-                  return "No Dark Circles" if score >=0.00 and <=3.99 else "Mild Dark Circles" if score >= 4.00 and <=6.99 else "Severe Dark Circles"
+                  return "No Dark Circles" if 0.00 <= score <= 3.99 else "Mild Dark Circles" if 4.00 <= score <= 6.99 else "Severe Dark Circles"
 
                  def get_acne_type(score):
-                   return "Clear Skin" if score >=0.00 and <=3.99 else "Moderate Acne" if score >= 4.00 and <=6.99 else "Severe Acne"
+                   return "Clear Skin" if 0.00 <= score <= 3.99 else "Moderate Acne" if 4.00 <= score <= 6.99 else "Severe Acne"
 
                  def get_pigmentation_type(score):
-                    return "Even Skin (Low Pigmentation)" if score >=0.00 and <=3.99 else "Mild Pigmentation" if score >= 4.00 and <=6.99 else "High Pigmentation"
+                    return "Even Skin (Low Pigmentation)" if 0.00 <= score <= 3.99 else "Mild Pigmentation" if 4.00 <= score <= 6.99 else "High Pigmentation"
 
                  def get_oiliness_type(score):
-                    return "Matte/Normal Skin (Low Shine)" if score >=0.00 and <=3.99 else "Moderately Oily Skin" if score >= 4.00 and <=6.99 else "Very Oily Skin (High Shine)"
+                    return "Matte/Normal Skin (Low Shine)" if 0.00 <= score <= 3.99 else "Moderately Oily Skin" if 4.00 <= score <= 6.99 else "Very Oily Skin (High Shine)"
 
                  # Display results in two columns
                  st.write("### 🏷 **Analysis Results**")
