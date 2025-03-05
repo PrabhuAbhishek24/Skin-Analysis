@@ -396,6 +396,23 @@ def analyze_all_features(face_image_path):
 
 def main():
     st.set_page_config(page_title="Facial Skin Analysis", layout="wide")
+    st.markdown("""
+    <style>
+        /* Increase font size and make navigation title bold */
+        .sidebar .sidebar-content {
+            font-size: 20px !important;
+            font-weight: bold !important;
+        }
+        
+        /* Increase section names font size */
+        .sidebar .radio label {
+            font-size: 18px !important;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
+
+    
     # Sidebar Navigation
     sections = ["📖 About", "📸 Facial Analysis","📝 Instructions","👨‍💻 Credits"]
     selected_section = st.sidebar.radio("Navigation", sections)
