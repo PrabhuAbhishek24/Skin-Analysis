@@ -396,21 +396,21 @@ def analyze_all_features(face_image_path):
 
 def main():
     st.set_page_config(page_title="Facial Skin Analysis", layout="wide")
+    # Apply custom CSS for sidebar styling
     st.markdown("""
     <style>
-        /* Increase font size and make navigation title bold */
-        .sidebar .sidebar-content {
-            font-size: 100px !important;
+        /* Style the sidebar title */
+        div[data-testid="stSidebarNav"] > label {
+            font-size: 22px !important;
             font-weight: bold !important;
         }
         
-        /* Increase section names font size */
-        .sidebar .radio label {
-            font-size: 100px !important;
+        /* Style the sidebar radio button options */
+        div[data-testid="stSidebarNav"] > div > div {
+            font-size: 18px !important;
         }
     </style>
-""", unsafe_allow_html=True)
-
+    """, unsafe_allow_html=True)
 
     
     # Sidebar Navigation
