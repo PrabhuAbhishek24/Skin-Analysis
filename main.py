@@ -400,13 +400,13 @@ def main():
     <style>
         /* Increase font size and make navigation title bold */
         .sidebar .sidebar-content {
-            font-size: 20px !important;
+            font-size: 40px !important;
             font-weight: bold !important;
         }
         
         /* Increase section names font size */
         .sidebar .radio label {
-            font-size: 18px !important;
+            font-size: 30px !important;
         }
     </style>
 """, unsafe_allow_html=True)
