@@ -375,7 +375,7 @@ def main():
     st.set_page_config(page_title="Facial Skin Analysis", layout="wide")
     # Sidebar Navigation
     sections = ["📖 About", "📸 Facial Analysis","📝 Instructions","👨‍💻 Credits"]
-    selected_section = st.sidebar.selectbox("Navigation", sections)
+    selected_section = st.sidebar.radio("Navigation", sections)
     if selected_section == "📖 About":
         st.title("📖 Facial Skin Analysis System")
         st.info("###  What is this system about?")
