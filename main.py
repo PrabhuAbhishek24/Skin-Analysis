@@ -487,26 +487,26 @@ def main():
 
 
     elif selected_section == "📸 Facial Analysis":
-    # 📌 Page Title with Styling
-    st.markdown("<h1 style='text-align: center; color:rgb(9, 8, 8);'>📸 Facial Skin Analysis</h1>", unsafe_allow_html=True)
-    st.write("### Choose how you want to provide an image for analysis.")
+     # 📌 Page Title with Styling
+     st.markdown("<h1 style='text-align: center; color:rgb(9, 8, 8);'>📸 Facial Skin Analysis</h1>", unsafe_allow_html=True)
+     st.write("### Choose how you want to provide an image for analysis.")
 
-    # User selects either to capture or upload an image
-    option = st.radio("Select Image Input Method:", ["📷 Capture Live Face", "🖼 Upload an Image"])
+     # User selects either to capture or upload an image
+     option = st.radio("Select Image Input Method:", ["📷 Capture Live Face", "🖼 Upload an Image"])
 
-    image = None  # Placeholder for image data
+     image = None  # Placeholder for image data
 
-    if option == "📷 Capture Live Face":
+     if option == "📷 Capture Live Face":
         captured_image = st.camera_input("📷 Capture Face")
         if captured_image:
             image = Image.open(captured_image)
     
-    elif option == "🖼 Upload an Image":
+     elif option == "🖼 Upload an Image":
         uploaded_image = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
         if uploaded_image:
             image = Image.open(uploaded_image)
 
-    if image:
+     if image:
         # Convert image to OpenCV format
         image = np.array(image)
         image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
