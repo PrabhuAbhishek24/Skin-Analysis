@@ -416,8 +416,9 @@ def main():
     # Sidebar Navigation
     sections = ["📖 About", "📸 Facial Analysis","📝 Instructions","👨‍💻 Credits"]
     selected_section = st.sidebar.radio("Navigation", sections)
-    st.markdown("---")
+    
     if selected_section == "📖 About":
+        st.markdown("---")
         st.title("📖 Facial Skin Analysis System")
         st.info("###  What is this system about?")
         st.success("This system analyzes facial skin attributes using advanced image processing techniques.")
