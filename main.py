@@ -622,11 +622,11 @@ def main():
     - Keep a neutral facial expression during image capture.
     - Avoid overexposure to bright lights that may affect skin detection.
     """)
-     # Horizontal line
-     st.markdown("---")
+# Horizontal line
+   st.markdown("---")
 
         # Footer
-     st.caption("Developed by **Corbin Technology Solutions**")
+   st.caption("Developed by **Corbin Technology Solutions**")
 
     
 
