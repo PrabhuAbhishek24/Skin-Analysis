@@ -486,7 +486,7 @@ def main():
         st.success("Anyone interested in gaining insights into their skin health and identifying areas for potential skincare improvements.")
 
 
-   elif selected_section == "📸 Facial Analysis":
+    elif selected_section == "📸 Facial Analysis":
      st.markdown("<h1 style='text-align: center; color:rgb(9, 8, 8);'>📸 Facial Skin Analysis</h1>", unsafe_allow_html=True)
      st.write("### Choose how you want to provide an image for analysis.")
 
