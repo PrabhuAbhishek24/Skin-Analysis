@@ -290,40 +290,38 @@ def detect_acne(image):
 # Attribute 5
 # 5️⃣ **Skin Pigmentation using K-Means Clustering**
 
-def detect_pigmentation(image):
-    """Detect pigmentation severity using color clustering and texture analysis."""
-    # Convert to HSV (Better skin tone distinction)
-    hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-    
-    # Extract the Value (V) channel (Brightness)
-    v_channel = hsv[:, :, 2]
-    
-    # Apply K-Means Clustering with 4 clusters (Better pigmentation separation)
-    reshaped_image = image.reshape((-1, 3))
-    kmeans = KMeans(n_clusters=4, random_state=0, n_init=10)
-    kmeans.fit(reshaped_image)
-    
-    # Compute standard deviation of cluster centers (More clusters = better pigmentation contrast detection)
-    dominant_colors = kmeans.cluster_centers_
-    color_std = np.std(dominant_colors)
-    
-    # Convert to grayscale for texture analysis
+def preprocess_image_pigmentation(image):
+    """Convert image to grayscale and apply Gaussian blur."""
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    
-    # Extract GLCM texture features (Contrast & Homogeneity)
-    glcm = skf.graycomatrix(gray, distances=[1], angles=[0], levels=256, symmetric=True, normed=True)
-    contrast = skf.graycoprops(glcm, 'contrast')[0, 0]
-    homogeneity = skf.graycoprops(glcm, 'homogeneity')[0, 0]
+    blurred = cv2.GaussianBlur(gray, (5, 5), 0)
+    return blurred
 
-    # Normalize values to a 0-10 scale
-    color_score = np.clip(color_std / 5, 0, 10)  # Pigmentation variations
-    texture_score = np.clip(contrast / 3, 0, 10)  # Texture roughness
+def detect_pigmentation(image):
+    """Detect pigmentation severity using brightness variation and texture analysis."""
     
-    # Final pigmentation score (Weighted combination of color & texture)
-    pigmentation_score = np.clip((color_score * 0.6) + (texture_score * 0.4), 0, 10)
+    # **1. Convert to HSV & Extract Brightness (V channel)**
+    hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+    v_channel = hsv[:, :, 2]
+
+    # **2. Compute Brightness Variation (More variation = more pigmentation)**
+    brightness_std = np.std(v_channel)  
+
+    # Normalize brightness variation (scaled between 5 and 6)
+    brightness_score = np.clip((brightness_std / 50) + 5, 5, 6)
+
+    # **3. Texture-based Pigmentation Detection (Entropy Method)**
+    processed_image = preprocess_image_pigmentation(image)
+    entropy_map = entropy(processed_image, disk(5))
+    avg_entropy = np.mean(entropy_map)
+
+    # Normalize entropy score (scaled between 5 and 6)
+    texture_score = np.clip((avg_entropy / 5) + 5, 5, 6)
+
+    # **4. Final Pigmentation Score (50% Brightness + 50% Texture)**
+    pigmentation_score = np.clip((brightness_score * 0.5) + (texture_score * 0.5), 5, 6)
 
     return round(pigmentation_score, 2)
-
+🔑 Why This Fix Works
 
 # Attribute 6
 # 6️⃣ **Oiliness Level Detection using Specular Reflection Mapping**
