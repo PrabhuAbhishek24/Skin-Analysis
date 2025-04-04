@@ -496,7 +496,6 @@ def main():
 
 
     elif selected_section == "📸 Facial Analysis":
-        st.markdown("---")
         # 📌 Page Title with Styling
         st.markdown("<h1 style='text-align: center; color:rgb(9, 8, 8);'>📸 Facial Skin Analysis</h1>", unsafe_allow_html=True)
         st.markdown("---")
