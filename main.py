@@ -416,6 +416,7 @@ def main():
     # Sidebar Navigation
     sections = ["📖 About", "📸 Facial Analysis","📝 Instructions","👨‍💻 Credits"]
     selected_section = st.sidebar.radio("Navigation", sections)
+    st.markdown("---")
     if selected_section == "📖 About":
         st.title("📖 Facial Skin Analysis System")
         st.info("###  What is this system about?")
@@ -485,8 +486,15 @@ def main():
         st.info("### 📝 Who can use this system?")
         st.success("Anyone interested in gaining insights into their skin health and identifying areas for potential skincare improvements.")
 
+        # Horizontal line
+        st.markdown("---")
+
+        # Footer
+        st.caption("Developed by **Corbin Technology Solutions**")
+
 
     elif selected_section == "📸 Facial Analysis":
+        st.markdown("---")
         # 📌 Page Title with Styling
         st.markdown("<h1 style='text-align: center; color:rgb(9, 8, 8);'>📸 Facial Skin Analysis</h1>", unsafe_allow_html=True)
         st.write("### Choose how you want to provide an image for analysis.")
@@ -581,6 +589,13 @@ def main():
                    st.write(f"🔹 **Acne/Pimples:** {acne_score}/10 ({get_acne_type(acne_score)})")
                    st.write(f"🔹 **Skin Pigmentation:** {pigmentation_score}/10 ({get_pigmentation_type(pigmentation_score)})")
                    st.write(f"🔹 **Oiliness Level:** {oiliness_score}/10 ({get_oiliness_type(oiliness_score)})")
+
+ # Horizontal line
+        st.markdown("---")
+
+        # Footer
+        st.caption("Developed by **Corbin Technology Solutions**")
+
 
    
    # Section 3
