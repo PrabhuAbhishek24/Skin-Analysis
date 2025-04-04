@@ -600,33 +600,35 @@ def main():
         st.caption("Developed by **Corbin Technology Solutions**")
 
 
-   
-   # Section 3
-    elif selected_section=="📝 Instructions":
-        st.write("## 📌 How to Use the System?")
-        st.markdown("---")
+   elif selected_section == "📝 Instructions":
+    st.write("## 📌 How to Use the System?")
+    st.markdown("---")
     
-        st.info("### 🖼 Step 1: Capture Your Image")
-        st.success("Ensure your face is well-lit and free from obstructions like hair or glasses. The system will capture a clear image of your face for analysis.")
+    st.info("### 🖼 Step 1: Capture Your Image")
+    st.success("Ensure your face is well-lit and free from obstructions like hair or glasses. The system will capture a clear image of your face for analysis.")
 
-        st.info("### 🔍 Step 2: Facial Analysis")
-        st.success("Once the image is captured, the system processes it to analyze different skin attributes such as oiliness, wrinkles, and pigmentation.")
+    st.info("### 🔍 Step 2: Facial Analysis")
+    st.success("Once the image is captured, the system processes it to analyze different skin attributes such as oiliness, wrinkles, and pigmentation.")
 
-        st.info("### 📊 Step 3: View Your Results")
-        st.success("After processing, you will receive a detailed breakdown of your skin attributes, helping you understand areas that may need attention.")
+    st.info("### 📊 Step 3: View Your Results")
+    st.success("After processing, you will receive a detailed breakdown of your skin attributes, helping you understand areas that may need attention.")
 
-        st.info("### ⚠️ Tips for Best Results")
-        st.success("""
-    - Use a well-lit environment to avoid shadows.
-    - Ensure your face is clean and free from makeup.
-    - Keep a neutral facial expression during image capture.
-    - Avoid overexposure to bright lights that may affect skin detection.
-    """)
-# Horizontal line
-   st.markdown("---")
+    st.info("### ⚠️ Tips for Best Results")
+    st.success(
+        """
+        - Use a well-lit environment to avoid shadows.
+        - Ensure your face is clean and free from makeup.
+        - Keep a neutral facial expression during image capture.
+        - Avoid overexposure to bright lights that may affect skin detection.
+        """
+    )
+    
+    # Horizontal line
+    st.markdown("---")
+    
+    # Footer
+    st.caption("Developed by **Corbin Technology Solutions**")
 
-        # Footer
-   st.caption("Developed by **Corbin Technology Solutions**")
 
     
 
