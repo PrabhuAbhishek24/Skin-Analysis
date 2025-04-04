@@ -517,23 +517,21 @@ def main():
          if face is not None:
           # 1️⃣ Check lighting conditions
           if check_lighting_conditions(face):  
-             # 2️⃣ Enhance face before analysis
-             enhanced_face = enhance_image(face)  
-             cv2.imwrite("captured_face.jpg", enhanced_face)
+             # 2️⃣ Use original face without enhancement
+             cv2.imwrite("captured_face.jpg", face)
+
              # Create two columns
-             col1, col2 = st.columns(2)
              col1, col_space, col2 = st.columns([2, 2.6, 2])  # Middle column for spacing
 
              with col1:
                 st.image(cv2.cvtColor(face, cv2.COLOR_BGR2RGB), 
-                     caption="📸 Captured Face", 
-                     width=300)
+                caption="📸 Captured Face", 
+                width=300)
 
              with col2:
-                st.image(cv2.cvtColor(enhanced_face, cv2.COLOR_BGR2RGB), 
-                     caption="✨ Enhanced Face", 
-                     width=300)
-
+                st.image(cv2.cvtColor(face, cv2.COLOR_BGR2RGB), 
+                caption="🧾 Original Face (Used for Analysis)", 
+                width=300)
 
              if st.button("🔍 Analyze Face"):
                with st.spinner("🔄 **Processing facial attributes...**"):
