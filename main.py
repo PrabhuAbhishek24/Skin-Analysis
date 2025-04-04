@@ -242,16 +242,11 @@ def detect_dark_circles(image):
 
     return round(dark_circle_score, 2)
 
-# Attribute 4
-# 4️⃣ **Acne Detection using Adaptive Thresholding**
-
 def preprocess_image_acne(image):
     """Apply Gaussian blur and convert to HSV for better acne detection."""
     blurred = cv2.GaussianBlur(image, (5, 5), 0)
     hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
-    
     return hsv
-
 
 def detect_acne(image):
     """Detect acne based on redness, texture, and blob size."""
@@ -259,48 +254,47 @@ def detect_acne(image):
     # Convert Image to HSV
     hsv = preprocess_image_acne(image)
 
-    # **1. Redness Detection (Refined Thresholds)**
-    lower_red = np.array([0, 70, 80])   # More selective threshold for acne
-    upper_red = np.array([20, 255, 255])
+    # **1. Redness Detection (More Restrictive Threshold)**
+    lower_red = np.array([0, 100, 100])  # Increased saturation & value threshold to avoid false positives
+    upper_red = np.array([15, 255, 255])
 
     acne_mask = cv2.inRange(hsv, lower_red, upper_red)
 
-    # Apply Morphological Transformations to remove noise
+    # **Noise Reduction**
     kernel = np.ones((3, 3), np.uint8)
     acne_mask = cv2.morphologyEx(acne_mask, cv2.MORPH_OPEN, kernel)
+    acne_mask = cv2.morphologyEx(acne_mask, cv2.MORPH_CLOSE, kernel)  # Closing to remove small holes
 
     # **2. Texture Analysis using GLCM**
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-    # Apply Contrast Limited Adaptive Histogram Equalization (CLAHE)
+    # Apply CLAHE to enhance contrast
     clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
     enhanced_gray = clahe.apply(gray)
 
     glcm = skf.graycomatrix(enhanced_gray, distances=[1], angles=[0], levels=256, symmetric=True, normed=True)
     
-    # Extract Multiple Features
+    # Extract Features
     contrast = skf.graycoprops(glcm, 'contrast')[0, 0]
     energy = skf.graycoprops(glcm, 'energy')[0, 0]
 
-    # Normalize Texture Scores (0-10 scale)
-    texture_score = np.clip((contrast / 10) + (1 - energy) * 10, 0, 10)
+    # Normalize Texture Scores (scale 5-10)
+    texture_score = np.clip((contrast / 20) + (1 - energy) * 8, 5, 10)  
 
     # **3. Acne Blob Detection**
     contours, _ = cv2.findContours(acne_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     acne_area = sum(cv2.contourArea(c) for c in contours)
 
-    # Dynamically scale acne severity using logarithmic scaling
-    if acne_area > 0:
-        acne_score = np.clip(np.log1p(acne_area) * 2, 0, 10)  
+    # Adjust Acne Severity (5-10 range)
+    if acne_area > 50:  # Set minimum detection threshold
+        acne_score = np.clip(np.log1p(acne_area) * 1.5, 5, 10)
     else:
-        acne_score = 0  
+        acne_score = 5  # Minimum score for clear skin
 
     # **4. Final Acne Severity Score (Weighted)**
-    final_acne_score = np.clip((acne_score * 0.6) + (texture_score * 0.4), 0, 10)
+    final_acne_score = np.clip((acne_score * 0.6) + (texture_score * 0.4), 5, 10)
 
     return round(final_acne_score, 2)
-
-
 
 # Attribute 5
 # 5️⃣ **Skin Pigmentation using K-Means Clustering**
