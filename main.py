@@ -487,73 +487,73 @@ def main():
 
 
     elif selected_section == "📸 Facial Analysis":
-        # 📌 Page Title with Styling
-        st.markdown("<h1 style='text-align: center; color:rgb(9, 8, 8);'>📸 Facial Skin Analysis</h1>", unsafe_allow_html=True)
-        st.write("### Choose how you want to provide an image for analysis.")
+    # 📌 Page Title with Styling
+    st.markdown("<h1 style='text-align: center; color:rgb(9, 8, 8);'>📸 Facial Skin Analysis</h1>", unsafe_allow_html=True)
+    st.write("### Choose how you want to provide an image for analysis.")
 
-        # User selects either to capture or upload an image
-        option = st.radio("Select Image Input Method:", ["📷 Capture Live Face", "🖼 Upload an Image"])
+    # User selects either to capture or upload an image
+    option = st.radio("Select Image Input Method:", ["📷 Capture Live Face", "🖼 Upload an Image"])
 
-        image = None  # Placeholder for image data
+    image = None  # Placeholder for image data
 
-        if option == "📷 Capture Live Face":
-            captured_image = st.camera_input("📷 Capture Face")
-            if captured_image:
-                image = Image.open(captured_image)
-        
-        elif option == "🖼 Upload an Image":
-            uploaded_image = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
-            if uploaded_image:
-                image = Image.open(uploaded_image)
+    if option == "📷 Capture Live Face":
+        captured_image = st.camera_input("📷 Capture Face")
+        if captured_image:
+            image = Image.open(captured_image)
+    
+    elif option == "🖼 Upload an Image":
+        uploaded_image = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
+        if uploaded_image:
+            image = Image.open(uploaded_image)
 
-        if image:
-         # Convert image to OpenCV format
-         image = np.array(image)
-         image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+    if image:
+        # Convert image to OpenCV format
+        image = np.array(image)
+        image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
 
-         # Extract the facial part only
-         face = extract_face(image)
+        # Extract the facial part only
+        face = extract_face(image)
 
-         if face is not None:
-          # 1️⃣ Check lighting conditions
-          if check_lighting_conditions(face):  
-             # 2️⃣ Use original face without enhancement
-             cv2.imwrite("captured_face.jpg", face)
+        if face is not None:
+            # 1️⃣ Check lighting conditions
+            if check_lighting_conditions(face):  
+                # 2️⃣ Use original face without enhancement
+                cv2.imwrite("captured_face.jpg", face)
 
-             # Add explanation note above
-             st.markdown("""
-             <div style='text-align: center; font-size: 18px; margin-bottom: 30px;'>
-             🧾 <b>Both images below show your captured face.</b><br>
-             The second image is used directly for skin analysis without any enhancements.
-             </div> 
-             """, unsafe_allow_html=True)
+                # Add explanation note above
+                st.markdown("""
+                    <div style='text-align: center; font-size: 18px; margin-bottom: 30px;'>
+                    🧾 <b>Both images below show your captured face.</b><br>
+                    The second image is used directly for skin analysis without any enhancements.
+                    </div> 
+                """, unsafe_allow_html=True)
 
-             # Convert face to RGB for Streamlit display
-             face_rgb = cv2.cvtColor(face, cv2.COLOR_BGR2RGB)
+                # Convert face to RGB for Streamlit display
+                face_rgb = cv2.cvtColor(face, cv2.COLOR_BGR2RGB)
 
-             # Create two columns with spacing
-             col1, col_space, col2 = st.columns([2, 0.5, 2])
+                # Create two columns with spacing
+                col1, col_space, col2 = st.columns([2, 0.5, 2])
 
-            # HTML styles for card containers
-            def render_face_card(title, image_data):
-              st.markdown(f"""
-              <div style='
-              background-color: #f9f9f9; 
-              padding: 15px; 
-              border-radius: 15px; 
-              box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
-              text-align: center;
-              '>
-             <h4 style='margin-bottom: 15px;'>{title}</h4>
-             </div>
-             """, unsafe_allow_html=True)
-            st.image(image_data, use_column_width=True)
+                # Function to render face cards
+                def render_face_card(title, image_data):
+                    st.markdown(f"""
+                        <div style='
+                            background-color: #f9f9f9; 
+                            padding: 15px; 
+                            border-radius: 15px; 
+                            box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+                            text-align: center;
+                        '>
+                            <h4 style='margin-bottom: 15px;'>{title}</h4>
+                        </div>
+                    """, unsafe_allow_html=True)
+                    st.image(image_data, use_column_width=True)
 
-           with col1:
-             render_face_card("📸 Original Captured Face", face_rgb)
+                with col1:
+                    render_face_card("📸 Original Captured Face", face_rgb)
 
-           with col2:
-             render_face_card("🧪 Face Used for Analysis", face_rgb)
+                with col2:
+                    render_face_card("🧪 Face Used for Analysis", face_rgb)
 
              if st.button("🔍 Analyze Face"):
                with st.spinner("🔄 **Processing facial attributes...**"):
