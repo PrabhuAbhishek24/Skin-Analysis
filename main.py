@@ -520,18 +520,40 @@ def main():
              # 2️⃣ Use original face without enhancement
              cv2.imwrite("captured_face.jpg", face)
 
-             # Create two columns
-             col1, col_space, col2 = st.columns([2, 2.6, 2])  # Middle column for spacing
+             # Add explanation note above
+             st.markdown("""
+             <div style='text-align: center; font-size: 18px; margin-bottom: 30px;'>
+             🧾 <b>Both images below show your captured face.</b><br>
+             The second image is used directly for skin analysis without any enhancements.
+             </div> 
+             """, unsafe_allow_html=True)
 
-             with col1:
-                st.image(cv2.cvtColor(face, cv2.COLOR_BGR2RGB), 
-                caption="📸 Captured Face", 
-                width=300)
+             # Convert face to RGB for Streamlit display
+             face_rgb = cv2.cvtColor(face, cv2.COLOR_BGR2RGB)
 
-             with col2:
-                st.image(cv2.cvtColor(face, cv2.COLOR_BGR2RGB), 
-                caption="🧾 Original Face (Used for Analysis)", 
-                width=300)
+             # Create two columns with spacing
+             col1, col_space, col2 = st.columns([2, 0.5, 2])
+
+            # HTML styles for card containers
+            def render_face_card(title, image_data):
+              st.markdown(f"""
+              <div style='
+              background-color: #f9f9f9; 
+              padding: 15px; 
+              border-radius: 15px; 
+              box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+              text-align: center;
+              '>
+             <h4 style='margin-bottom: 15px;'>{title}</h4>
+             </div>
+             """, unsafe_allow_html=True)
+            st.image(image_data, use_column_width=True)
+
+           with col1:
+             render_face_card("📸 Original Captured Face", face_rgb)
+
+           with col2:
+             render_face_card("🧪 Face Used for Analysis", face_rgb)
 
              if st.button("🔍 Analyze Face"):
                with st.spinner("🔄 **Processing facial attributes...**"):
