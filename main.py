@@ -321,7 +321,6 @@ def detect_pigmentation(image):
     pigmentation_score = np.clip((brightness_score * 0.5) + (texture_score * 0.5), 5, 6)
 
     return round(pigmentation_score, 2)
-🔑 Why This Fix Works
 
 # Attribute 6
 # 6️⃣ **Oiliness Level Detection using Specular Reflection Mapping**
