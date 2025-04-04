@@ -418,8 +418,9 @@ def main():
     selected_section = st.sidebar.radio("Navigation", sections)
     
     if selected_section == "📖 About":
-        st.markdown("---")
+
         st.title("📖 Facial Skin Analysis System")
+        st.markdown("---")
         st.info("###  What is this system about?")
         st.success("This system analyzes facial skin attributes using advanced image processing techniques.")
 
