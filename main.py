@@ -486,7 +486,7 @@ def main():
         st.success("Anyone interested in gaining insights into their skin health and identifying areas for potential skincare improvements.")
 
 
-elif selected_section == "📸 Facial Analysis":
+   elif selected_section == "📸 Facial Analysis":
     st.markdown("<h1 style='text-align: center; color:rgb(9, 8, 8);'>📸 Facial Skin Analysis</h1>", unsafe_allow_html=True)
     st.write("### Choose how you want to provide an image for analysis.")
 
@@ -509,14 +509,14 @@ elif selected_section == "📸 Facial Analysis":
         face = extract_face(image)
 
         if face is not None:
-            if check_lighting_conditions(face):  
+            if check_lighting_conditions(face):
                 cv2.imwrite("captured_face.jpg", face)
 
                 st.markdown("""
                     <div style='text-align: center; font-size: 18px; margin-bottom: 30px;'>
                     🧾 <b>Both images below show your captured face.</b><br>
                     The second image is used directly for skin analysis without any enhancements.
-                    </div> 
+                    </div>
                 """, unsafe_allow_html=True)
 
                 face_rgb = cv2.cvtColor(face, cv2.COLOR_BGR2RGB)
@@ -525,10 +525,10 @@ elif selected_section == "📸 Facial Analysis":
                 def render_face_card(title, image_data):
                     st.markdown(f"""
                         <div style='
-                            background-color: #f9f9f9; 
-                            padding: 15px; 
-                            border-radius: 15px; 
-                            box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+                            background-color: #f9f9f9;
+                            padding: 15px;
+                            border-radius: 15px;
+                            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
                             text-align: center;
                         '>
                             <h4 style='margin-bottom: 15px;'>{title}</h4>
@@ -585,7 +585,6 @@ elif selected_section == "📸 Facial Analysis":
                             st.write(f"🔹 **Acne/Pimples:** {acne_score}/10 ({get_acne_type(acne_score)})")
                             st.write(f"🔹 **Skin Pigmentation:** {pigmentation_score}/10 ({get_pigmentation_type(pigmentation_score)})")
                             st.write(f"🔹 **Oiliness Level:** {oiliness_score}/10 ({get_oiliness_type(oiliness_score)})")
-
    
    # Section 3
     elif selected_section=="📝 Instructions":
