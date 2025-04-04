@@ -415,7 +415,7 @@ def main():
     
     # Sidebar Navigation
     sections = ["📖 About", "📸 Facial Analysis","📝 Instructions","👨‍💻 Credits"]
-    selected_section = st.sidebar.radio("Navigation", sections)
+    selected_section = st.sidebar.selectbox("Navigation", sections)
     
     if selected_section == "📖 About":
 
