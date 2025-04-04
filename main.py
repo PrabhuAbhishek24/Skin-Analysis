@@ -499,6 +499,7 @@ def main():
         st.markdown("---")
         # 📌 Page Title with Styling
         st.markdown("<h1 style='text-align: center; color:rgb(9, 8, 8);'>📸 Facial Skin Analysis</h1>", unsafe_allow_html=True)
+        st.markdown("---")
         st.write("### Choose how you want to provide an image for analysis.")
 
         # User selects either to capture or upload an image
@@ -603,6 +604,7 @@ def main():
    # Section 3
     elif selected_section=="📝 Instructions":
         st.write("## 📌 How to Use the System?")
+        st.markdown("---")
     
         st.info("### 🖼 Step 1: Capture Your Image")
         st.success("Ensure your face is well-lit and free from obstructions like hair or glasses. The system will capture a clear image of your face for analysis.")
@@ -620,11 +622,20 @@ def main():
     - Keep a neutral facial expression during image capture.
     - Avoid overexposure to bright lights that may affect skin detection.
     """)
+     # Horizontal line
+     st.markdown("---")
+
+        # Footer
+     st.caption("Developed by **Corbin Technology Solutions**")
+
+    
 
     # Section 4
 
     elif selected_section == "👨‍💻 Credits":
       st.header("👨‍💻 Credits")
+      st.markdown("---")
+      
 
      # Highlight the developer information
       st.subheader("🌟 Developed By")
