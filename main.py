@@ -487,16 +487,16 @@ def main():
 
 
    elif selected_section == "📸 Facial Analysis":
-    st.markdown("<h1 style='text-align: center; color:rgb(9, 8, 8);'>📸 Facial Skin Analysis</h1>", unsafe_allow_html=True)
-    st.write("### Choose how you want to provide an image for analysis.")
+     st.markdown("<h1 style='text-align: center; color:rgb(9, 8, 8);'>📸 Facial Skin Analysis</h1>", unsafe_allow_html=True)
+     st.write("### Choose how you want to provide an image for analysis.")
 
-    option = st.radio("Select Image Input Method:", ["📷 Capture Live Face", "🖼 Upload an Image"])
-    image = None
+     option = st.radio("Select Image Input Method:", ["📷 Capture Live Face", "🖼 Upload an Image"])
+     image = None
 
-    if option == "📷 Capture Live Face":
+     if option == "📷 Capture Live Face":
         captured_image = st.camera_input("📷 Capture Face")
         if captured_image:
-            image = Image.open(captured_image)
+          image = Image.open(captured_image)
 
     elif option == "🖼 Upload an Image":
         uploaded_image = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
